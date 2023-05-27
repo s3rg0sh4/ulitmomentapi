@@ -3,7 +3,11 @@ package com.ulitmoment.controllers;
 import com.ulitmoment.dtos.AuthDTO;
 import com.ulitmoment.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("auth")
@@ -12,7 +16,10 @@ public class SignInController {
     private UserService userService;
 
     @PostMapping
-    public Boolean getUser(@RequestBody AuthDTO dto) {
-        return userService.userCheck(dto.getEmail(), dto.getPassword());
+    public ResponseEntity login(@RequestBody AuthDTO dto) {
+        if (userService.userCheck(dto.getEmail(), dto.getPassword())) {
+            return ResponseEntity.ok().body(null);
+        }
+        return ResponseEntity.badRequest().body(null);
     }
 }

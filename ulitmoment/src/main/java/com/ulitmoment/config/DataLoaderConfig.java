@@ -3,7 +3,7 @@ package com.ulitmoment.config;
 import com.ulitmoment.entities.*;
 import com.ulitmoment.enums.Roles;
 import com.ulitmoment.repos.CourseRepo;
-import com.ulitmoment.repos.FileRepo;
+import com.ulitmoment.repos.FileSystemRepo;
 import com.ulitmoment.repos.UserRepo;
 import com.ulitmoment.services.CourseService;
 import com.ulitmoment.services.RoleService;
@@ -20,7 +20,7 @@ public class DataLoaderConfig implements ApplicationRunner {
     @Autowired
     private RoleService roleService;
     @Autowired
-    private FileRepo fileRepo;
+    private FileSystemRepo fileSystemRepo;
     @Autowired
     private UserRepo userRepo;
 
@@ -33,7 +33,7 @@ public class DataLoaderConfig implements ApplicationRunner {
     private CourseRepo courseRepo;
 
     public void run(ApplicationArguments args) {
-        fileRepo.init();
+        fileSystemRepo.init();
         roleService.save(new Role(Roles.ROLE_PUPIL));
         roleService.save(new Role(Roles.ROLE_CURATOR));
         roleService.save(new Role(Roles.ROLE_TEACHER));

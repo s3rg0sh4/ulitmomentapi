@@ -21,17 +21,13 @@ public class UserService implements UserDetailsService {
     UserRepo userRepo;
     @Autowired
     RoleRepo roleRepo;
+    @Autowired
+    FileService fileService;
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
-//    @RequestParam("pic")
-//    MultipartFile pic,
-//    @RequestParam("about")String about,
-//    @RequestParam("phone") String phone,
-//    @RequestParam("birthday")
-//    Date birthday
-    public User updateUser(User user, byte[] pic, String about, String phone, Date birthday) {
-        user.setPic(pic);
+
+    public User updateUser(User user, String about, String phone, Date birthday) {
         user.setAbout(about);
         user.setPhone(phone);
         user.setBirthday(birthday);

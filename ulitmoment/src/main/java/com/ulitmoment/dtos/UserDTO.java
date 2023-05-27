@@ -8,16 +8,22 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 @Data
-public class CourseDTO {
+public class UserDTO {
     private Long id;
-    private String name;
+    private String email;
+    private String fullname;
+    private String role;
     private String about;
+    private String phone;
     private String pic;
 
-    public CourseDTO(Long id, String name, String about, Resource imageResource) {
+    public UserDTO(Long id, String email, String fullname, String role, String about, String phone, Resource imageResource) {
         this.id = id;
-        this.name = name;
+        this.email = email;
+        this.fullname = fullname;
+        this.role = role;
         this.about = about;
+        this.phone = phone;
 
         try {
             byte[] imageBytes = StreamUtils.copyToByteArray(imageResource.getInputStream());

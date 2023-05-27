@@ -16,12 +16,13 @@ public class Course {
     private Long id;
     private String name;
     private String about;
-    private byte[] pic;
 
-    public Course(String name, String about, byte[] pic) {
+    @OneToOne
+    private FileDetails pic;
+
+    public Course(String name, String about) {
         this.name = name;
         this.about = about;
-        this.pic = pic;
     }
 
     @OneToMany(fetch = FetchType.EAGER)

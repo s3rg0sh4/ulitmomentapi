@@ -4,6 +4,7 @@ import com.ulitmoment.entities.Course;
 import com.ulitmoment.repos.CourseRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -11,16 +12,21 @@ import java.util.List;
 public class CourseService {
     @Autowired
     private CourseRepo courseRepo;
+    @Autowired
+    private FileService fileService;
 
 //    public void addPupilToCourse(Course course, Pupil pupil) {
 //        courseRepo.addPupilToCourse(course.getId(), pupil);
 //    }
 
-    public void addCourse(String name, String about, byte[] pic) {
-        courseRepo.save(new Course(name, about, pic));
+    public void addCourse(String name, String about, MultipartFile pic) {
+        Course course = courseRepo.save(new Course(name, about));
+        fileService.save(pic, course);
     }
 
     public List<Course> listCourses() {
-        return courseRepo.findAll();
+        List<Course> courses = courseRepo.findAll();
+
+        return courses;
     }
 }

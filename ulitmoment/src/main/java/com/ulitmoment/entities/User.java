@@ -23,7 +23,6 @@ public abstract class User implements UserDetails {
     private Long id;
     private String email;
     private String password;
-    private byte[] pic;
     private String about;
     private String surname;
     private String name;
@@ -31,8 +30,12 @@ public abstract class User implements UserDetails {
     private Date birthday;
     private String phone;
 
+    @OneToOne
+    private FileDetails pic;
+
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
+
     public User(String email) {
         this.email = email;
     }
