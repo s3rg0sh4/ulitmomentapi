@@ -26,7 +26,7 @@ public class Pupil extends User {
     private Set<Course> courses;
 
     @ManyToMany
-    private Set<Score> scores;
+    private Set<Exercise> exercises;
 
 //    @ManyToMany
 //    private Set<Homework> homeworks;

@@ -31,23 +31,23 @@ public class UserService implements UserDetailsService {
         user.setAbout(about);
         user.setPhone(phone);
         user.setBirthday(birthday);
-        return user;
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepo.findByEmail(email);
-
-        if (user == null) {
-            throw new UsernameNotFoundException("User not found");
-        }
-
+        userRepo.save(user);
         return user;
     }
 
     public boolean userCheck(String email, String password) {
         User user = userRepo.findByEmail(email);
         return bCryptPasswordEncoder.matches(password, user.getPassword());
+    }
+
+    public User getById(Long id) {
+        User user = userRepo.findById(id).get();
+
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+
+        return user;
     }
 
     public User getByEmail(String email) {
@@ -77,5 +77,16 @@ public class UserService implements UserDetailsService {
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         }
         return userRepo.save(user);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = userRepo.findByEmail(email);
+
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+
+        return user;
     }
 }

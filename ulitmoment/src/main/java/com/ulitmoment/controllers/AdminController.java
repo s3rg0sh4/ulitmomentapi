@@ -2,6 +2,7 @@ package com.ulitmoment.controllers;
 
 import com.ulitmoment.dtos.AddUserDTO;
 import com.ulitmoment.dtos.CourseDTO;
+import com.ulitmoment.dtos.SchoolDTO;
 import com.ulitmoment.dtos.UserCoreDTO;
 import com.ulitmoment.entities.Admin;
 import com.ulitmoment.entities.Curator;
@@ -10,6 +11,7 @@ import com.ulitmoment.entities.Teacher;
 import com.ulitmoment.enums.Roles;
 import com.ulitmoment.services.CourseService;
 import com.ulitmoment.services.FileService;
+import com.ulitmoment.services.SchoolService;
 import com.ulitmoment.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -30,6 +32,18 @@ public class AdminController {
     private FileService fileService;
     @Autowired
     private CourseService courseService;
+    @Autowired
+    private SchoolService schoolService;
+
+    @GetMapping("/schools")
+    public ResponseEntity<List<SchoolDTO>> school() {
+        List<SchoolDTO> schoolList = new ArrayList<>();
+        schoolService.schoolList().stream().forEach(school -> {
+            schoolList.add(new SchoolDTO(school.getId(), school.getName(), school.getAddress(), school.getPhone()));
+        });
+        return ResponseEntity.ok(schoolList);
+    }
+
 
     @GetMapping("/courses")
     public ResponseEntity<List<CourseDTO>> courses() {

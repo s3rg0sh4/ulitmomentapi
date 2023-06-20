@@ -24,9 +24,6 @@ public class DataLoaderConfig implements ApplicationRunner {
     @Autowired
     private UserRepo userRepo;
 
-//    @Autowired
-//    private UserRepo userRepo;
-
     @Autowired
     private CourseService courseService;
     @Autowired
@@ -39,11 +36,5 @@ public class DataLoaderConfig implements ApplicationRunner {
         roleService.save(new Role(Roles.ROLE_TEACHER));
         roleService.save(new Role(Roles.ROLE_ADMIN));
         userService.saveUser(new Admin("ulitmoment@gmail.com", "ulit", "Амогус", "Импостер", "Мафиозович"), Roles.ROLE_ADMIN);
-//        userService.saveUser(new Pupil("aaaa"), Roles.ROLE_ADMIN);
-
-//        courseRepo.save(new Course());
-//        Course course = courseRepo.findById(1L).get();
-//        Pupil pupil = (Pupil)userRepo.findById(2L).get();
-//        courseService.addPupilToCourse(course, pupil);
     }
 }

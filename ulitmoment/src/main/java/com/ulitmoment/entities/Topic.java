@@ -16,9 +16,13 @@ public class Topic {
     private Long id;
     private String name;
 
+    private String summary;
+    private String task;
+    private String hint;
+
     @ManyToOne
     private Course course;
 
-    @ManyToMany
-    private Set<Score> scores;
+    @OneToMany
+    private Set<Exercise> exercises;
 }
