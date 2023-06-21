@@ -27,6 +27,11 @@ public class UserService implements UserDetailsService {
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    public void setUserPassword(User user, String password) {
+        user.setPassword(password);
+        userRepo.save(user);
+    }
+
     public User updateUser(User user, String about, String phone, Date birthday) {
         user.setAbout(about);
         user.setPhone(phone);

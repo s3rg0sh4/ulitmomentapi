@@ -1,7 +1,6 @@
 package com.ulitmoment.entities;
 
 import jakarta.persistence.*;
-import jakarta.transaction.Transactional;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,19 +19,18 @@ public class Course {
     @OneToOne
     private FileDetails pic;
 
+    @OneToMany(fetch = FetchType.EAGER)
+    private Set<Topic> topics;
+
     public Course(String name, String about) {
         this.name = name;
         this.about = about;
     }
 
-    @OneToMany(fetch = FetchType.EAGER)
-    private Set<Topic> topics;
-
     @ManyToMany
-    @JoinTable(name = "course_pupils", joinColumns = @JoinColumn(name = "course_id"), inverseJoinColumns = @JoinColumn(name = "pupil_id"))
+    @JoinTable(joinColumns = @JoinColumn(name = "course_id"), inverseJoinColumns = @JoinColumn(name = "pupil_id"))
     private Set<Pupil> pupils;
 
-    @Transactional
     public void addPupil(Pupil pupil) {
         pupils.add(pupil);
     }

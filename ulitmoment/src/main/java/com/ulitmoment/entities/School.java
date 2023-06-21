@@ -21,15 +21,17 @@ public class School {
     @OneToMany
     private Set<Pupil> pupils;
 
-    public School(String name) {
-        this.name = name;
-    }
-
     public School(String name, String address, String phone) {
         this.name = name;
         this.address = address;
         this.phone = phone;
     }
 
+    public School(String name) {
+        this.name = name;
+    }
 
+    public void addPupil(Pupil pupil) {
+        this.pupils.add(pupil);
+    }
 }

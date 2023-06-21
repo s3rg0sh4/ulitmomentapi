@@ -1,5 +1,6 @@
 package com.ulitmoment.services;
 
+import com.ulitmoment.entities.Pupil;
 import com.ulitmoment.entities.School;
 import com.ulitmoment.repos.SchoolRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +23,10 @@ public class SchoolService {
 
     public School getSchool(Long id) {
         return schoolRepo.getById(id);
+    }
+
+    public void addPupil(School school, Pupil pupil) {
+        school.addPupil(pupil);
+        schoolRepo.save(school);
     }
 }

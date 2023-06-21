@@ -7,6 +7,7 @@ import jakarta.transaction.Transactional;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -37,5 +38,21 @@ public class Pupil extends User {
 
     public Pupil(String email, String surname, String name, String patronymic) {
         super(email, surname, name, patronymic);
+    }
+    public Pupil(String email, String password, String surname, String name, String patronymic) {
+        super(email, password, surname, name, patronymic);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pupil pupil = (Pupil) o;
+        return Objects.equals(this.getEmail(), pupil.getEmail());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.getEmail());
     }
 }

@@ -2,6 +2,7 @@ package com.ulitmoment.controllers;
 
 import com.ulitmoment.dtos.AddPupilDTO;
 import com.ulitmoment.dtos.CourseDTO;
+import com.ulitmoment.dtos.UserCoreDTO;
 import com.ulitmoment.entities.Course;
 import com.ulitmoment.entities.Pupil;
 import com.ulitmoment.entities.User;
@@ -62,13 +63,25 @@ public class CourseController {
                 .body(courseList);
     }
 
-    @PutMapping
-    public ResponseEntity addPupil(AddPupilDTO dto) {
-        Pupil pupil = pupilRepo.findById(dto.getPupilId()).get();
-        Course course = courseRepo.findById(dto.getCourseId()).get();
-        courseService.addPupilToCourse(course, pupil);
+    @GetMapping("pupils")
+    public ResponseEntity pupilList(@RequestParam Long id) {
+        Course course = courseRepo.findById(id).get();
+        courseService.userList(course);
 
-        return ResponseEntity.ok().body(null);
+        List<UserCoreDTO> userList = new ArrayList<>();
+        courseService.userList(course).stream().forEach(user -> {
+            userList.add(new UserCoreDTO(user.getId(), user.getEmail(), user.getFullname(), user.getRole().getName()));
+        });
+        return ResponseEntity.ok().body(userList);
+    }
+
+    @PostMapping("addPupil")
+    public ResponseEntity addPupil(@RequestBody AddPupilDTO dto) {
+        Course course = courseRepo.findById(dto.getId()).get();
+        Pupil pupil = pupilRepo.findById(dto.getPupilId()).get();
+        Long l = courseService.addPupilToCourse(course, pupil);
+
+        return ResponseEntity.ok().body(l);
     }
 
     @PostMapping

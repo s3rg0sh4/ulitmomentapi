@@ -36,5 +36,7 @@ public class DataLoaderConfig implements ApplicationRunner {
         roleService.save(new Role(Roles.ROLE_TEACHER));
         roleService.save(new Role(Roles.ROLE_ADMIN));
         userService.saveUser(new Admin("ulitmoment@gmail.com", "ulit", "Амогус", "Импостер", "Мафиозович"), Roles.ROLE_ADMIN);
+        userService.saveUser(new Pupil("s3rg0sh4@gmail.com", "123", "Школьников", "Школьник", "Школьникович"), Roles.ROLE_PUPIL);
+
     }
 }

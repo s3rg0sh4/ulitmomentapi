@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class AddPupilDTO {
-    private Long courseId;
+    private Long id;
     private Long pupilId;
 }

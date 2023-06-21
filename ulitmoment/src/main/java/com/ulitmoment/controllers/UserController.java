@@ -1,5 +1,6 @@
 package com.ulitmoment.controllers;
 
+import com.ulitmoment.dtos.AuthDTO;
 import com.ulitmoment.dtos.UserDTO;
 import com.ulitmoment.entities.User;
 import com.ulitmoment.services.FileService;
@@ -24,6 +25,13 @@ public class UserController {
 //        User user = userService.getById(userId);
 //        return ResponseEntity.ok().body(new UserDTO(user, fileService.get(user)));
 //    }
+
+    @PostMapping("setPassword")
+    public ResponseEntity setPassword(@RequestBody AuthDTO dto) {
+        User user = userService.getByEmail(dto.getEmail());
+        userService.setUserPassword(user, dto.getPassword());
+        return ResponseEntity.ok().body(null);
+    }
 
     @GetMapping("getUserById")
     public ResponseEntity<UserDTO> getUserById(@RequestParam String id) {

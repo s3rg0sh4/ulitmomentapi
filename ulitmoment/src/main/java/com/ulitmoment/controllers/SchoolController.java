@@ -23,4 +23,6 @@ public class SchoolController {
 
         return ResponseEntity.ok().body(null);
     }
+
+
 }
